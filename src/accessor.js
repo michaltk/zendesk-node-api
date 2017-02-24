@@ -37,6 +37,17 @@ var Accessor = function(config, single, plural){
       })
     },
 
+        showComment: function(id){
+      return new Promise(function(fufill, reject){
+        zdrequest.get('/' + plural + '/' + id + '/comments.json').then(function(data){
+          console.log('data', data);
+          fufill(data.comments)
+        }).catch(function(err){
+          reject(err)
+        })
+      })
+    },
+
     create: function(data){
       var createData = {}
       createData[single] = data
